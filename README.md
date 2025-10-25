@@ -1,5 +1,9 @@
 # SpecChain — RWA Reserve-Backed Token (Week 1)
 
+[![CI](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml/badge.svg)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml)
+[![Security](https://github.com/roguedan/specchain-reserve-token/actions/workflows/security.yml/badge.svg)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/security.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A minimal compliance-on-chain demo for reserve-backed tokens that enforces continuous solvency checks, bridging TradFi reserve requirements with blockchain transparency.
 
 ## 🎯 Features
