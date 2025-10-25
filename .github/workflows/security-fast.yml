@@ -44,6 +44,9 @@ jobs:
       - name: Run Foundry tests with fuzz
         run: |
           forge test --fuzz-runs 1000 --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' -vv
+          
+          # Generate test results for security analysis
+          forge test --fuzz-runs 1000 --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' --json > security-test-results.json || true
 
       - name: Install Python for Slither
         uses: actions/setup-python@v4
@@ -244,6 +247,7 @@ jobs:
             slither-results.sarif
             security-summary.md
             test-results.json
+            security-test-results.json
           retention-days: 30
           if-no-files-found: warn
 

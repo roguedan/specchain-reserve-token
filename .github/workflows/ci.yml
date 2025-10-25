@@ -36,6 +36,9 @@ jobs:
         run: |
           # Run all tests except known failing invariant test
           forge test -vvv --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol'
+          
+          # Generate JUnit XML for test results (for Codecov test insights)
+          forge test --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' --json > test-results.json || true
         id: test
 
       - name: Run Forge coverage
@@ -61,13 +64,21 @@ jobs:
           cat coverage-summary.txt >> test-report.md 2>/dev/null || echo "Coverage data not available" >> test-report.md
           echo "\`\`\`" >> test-report.md
 
-      - name: Upload coverage to Codecov
+      - name: Upload coverage and test results to Codecov
         uses: codecov/codecov-action@v4
         with:
           file: ./lcov.info
           flags: foundry
           name: foundry-coverage
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+          
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1
+        if: ${{ !cancelled() }}
+        with:
+          file: test-results.json
+          flags: foundry-tests
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test artifacts
@@ -77,6 +88,7 @@ jobs:
           path: |
             test-report.md
             coverage-summary.txt
+            test-results.json
             .gas-snapshot
         if: always()
 
