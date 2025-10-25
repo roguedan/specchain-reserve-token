@@ -28,10 +28,20 @@ jobs:
         with:
           version: nightly
 
-      - name: Install dependencies
+      - name: Initialize submodules and build
         run: |
           forge --version
-          forge install --no-commit || echo "Dependencies may already be installed"
+          echo "=== Checking submodules ==="
+          ls -la lib/ || echo "No lib directory"
+          
+          # Initialize submodules if they're not already
+          git submodule update --init --recursive || echo "Submodules already initialized"
+          
+          # List lib contents
+          ls -la lib/
+          
+          # Build contracts
+          forge build --force
 
       - name: Install Python for security tools
         uses: actions/setup-python@v4

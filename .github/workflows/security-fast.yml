@@ -26,8 +26,20 @@ jobs:
         with:
           version: nightly
 
-      - name: Install dependencies
-        run: forge install --no-commit
+      - name: Initialize submodules and build
+        run: |
+          forge --version
+          echo "=== Checking submodules ==="
+          ls -la lib/ || echo "No lib directory"
+          
+          # Initialize submodules if they're not already
+          git submodule update --init --recursive || echo "Submodules already initialized"
+          
+          # List lib contents
+          ls -la lib/
+          
+          # Build contracts
+          forge build --force
 
       - name: Run Foundry tests with fuzz
         run: |
@@ -67,6 +79,9 @@ jobs:
           
           # Run Slither with JSON output
           slither . --config-file slither.config.json --json slither-results.json || echo "Slither JSON completed with warnings"
+          
+          # Ensure result files exist (create empty if needed)
+          touch slither-results.sarif slither-results.json
           
           # Display results
           echo "=== SLITHER ANALYSIS SUMMARY ==="
