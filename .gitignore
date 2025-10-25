@@ -13,3 +13,9 @@ docs/
 
 # Environment files with secrets
 .env
+
+# Personal learning notes and reflections
+learnings/
+
+# System files
+.DS_Store
