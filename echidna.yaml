@@ -1,0 +1,63 @@
+# Echidna Configuration for RwaToken Security Testing
+# Advanced property-based fuzzing configuration
+
+# Test execution parameters
+testLimit: 50000          # Number of test sequences to run
+shrinkLimit: 5000          # Attempts to shrink failing test cases
+seqLen: 100               # Length of test sequences
+contractAddr: "0x00a329c0648769A73afAc7F9381E08FB43dBEA72"
+
+# Coverage and exploration
+coverage: true             # Enable coverage tracking
+corpusDir: "echidna-corpus" # Directory to store coverage corpus
+
+# Solver configuration  
+solver: "cvc4"            # SMT solver (cvc4, z3, or yices)
+cryticArgs: ["--hardhat-ignore-compile"] # Arguments for crytic-compile
+
+# Contract compilation
+codeSize: 0x6000          # Maximum contract size
+deployer: "0x41414141"    # Address to deploy contracts from
+sender: ["0x10000", "0x20000", "0x30000"] # Addresses to send transactions from
+
+# Test case management
+shrinkLimit: 5000         # Maximum shrinking attempts
+testLimit: 50000          # Maximum number of tests
+
+# Failure conditions
+checkAsserts: true        # Check assert statements
+# testMode: assertion       # Test mode: assertion, property, or optimization
+psender: "0x10000"       # Address for property testing
+
+# Advanced options
+multi-abi: false          # Use multiple ABIs
+experimental: false       # Enable experimental features
+
+# Output configuration
+format: text              # Output format: text, json, or none
+quiet: false             # Suppress verbose output
+
+# Gas configuration
+estimateGas: true         # Estimate gas usage
+maxGasPerBlock: 12500000  # Maximum gas per block
+maxGasPerTx: 12500000     # Maximum gas per transaction
+maxTimeDelay: 604800      # Maximum time delay (1 week)
+maxBlockDelay: 60480      # Maximum block delay
+
+# Property testing specific
+filterBlacklist: true     # Filter blacklisted functions
+filterFunctions: []       # Functions to filter out
+
+# Corpus and state management
+corpusDir: "echidna-corpus"
+coverage: true
+workers: 1               # Number of parallel workers
+
+# Ethereum specific
+balanceAddr: "0xffffffffffffffffffffffffffffffffffffffff" # High balance address
+balanceContract: 100000000000000000000 # Contract balance (100 ETH)
+
+# Advanced features
+mutConsts: []            # Constants to mutate
+dictFreq: 0.40          # Dictionary usage frequency
+corpusSize: 100         # Maximum corpus size
