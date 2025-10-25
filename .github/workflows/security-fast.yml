@@ -60,17 +60,24 @@ jobs:
 
       - name: Run Slither static analysis
         run: |
-          slither . --config-file slither.config.json --sarif slither-results.sarif || true
-          slither . --config-file slither.config.json --json slither-results.json || true
+          echo "=== RUNNING SLITHER STATIC ANALYSIS ==="
           
-      - name: Display Slither results
-        run: |
-          echo "=== SLITHER SECURITY ANALYSIS RESULTS ==="
-          slither . --config-file slither.config.json || true
+          # Run Slither with SARIF output
+          slither . --config-file slither.config.json --sarif slither-results.sarif || echo "Slither SARIF completed with warnings"
+          
+          # Run Slither with JSON output
+          slither . --config-file slither.config.json --json slither-results.json || echo "Slither JSON completed with warnings"
+          
+          # Display results
+          echo "=== SLITHER ANALYSIS SUMMARY ==="
+          slither . --config-file slither.config.json || echo "Slither analysis completed"
+          
+          # Check if files were created
+          ls -la slither-results.* || echo "No Slither result files generated"
 
       - name: Upload Slither SARIF results
-        uses: github/codeql-action/upload-sarif@v2
-        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('slither-results.sarif') != ''
         with:
           sarif_file: slither-results.sarif
           category: slither
@@ -221,7 +228,9 @@ jobs:
             slither-results.json
             slither-results.sarif
             security-summary.md
+            test-results.json
           retention-days: 30
+          if-no-files-found: warn
 
       - name: Security check status
         run: |

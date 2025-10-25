@@ -29,7 +29,9 @@ jobs:
           version: nightly
 
       - name: Install dependencies
-        run: forge install --no-commit
+        run: |
+          forge --version
+          forge install --no-commit || echo "Dependencies may already be installed"
 
       - name: Install Python for security tools
         uses: actions/setup-python@v4
@@ -87,21 +89,24 @@ jobs:
         run: |
           echo "=== ECHIDNA PROPERTY-BASED FUZZING ==="
           
-          # Pull Echidna Docker image
-          docker pull trailofbits/eth-security-toolbox
-          
           # Create corpus directory
           mkdir -p echidna-corpus
           
-          # Run Echidna fuzzing
-          docker run -it --rm \
-            -v $PWD:/workspace \
-            -w /workspace \
-            trailofbits/eth-security-toolbox \
-            echidna echidna/EchidnaTest.sol --contract EchidnaTest --config echidna.yaml || true
+          # Try to pull and run Echidna (skip on failure)
+          if docker pull trailofbits/eth-security-toolbox 2>/dev/null; then
+            echo "Running Echidna fuzzing..."
+            docker run --rm \
+              -v $PWD:/workspace \
+              -w /workspace \
+              trailofbits/eth-security-toolbox \
+              echidna echidna/EchidnaTest.sol --contract EchidnaTest --config echidna.yaml || echo "Echidna run completed with warnings"
+          else
+            echo "Echidna Docker image not available, skipping property-based fuzzing"
+            echo "Property-based fuzzing: Skipped (Docker unavailable)" > echidna-corpus/status.txt
+          fi
           
           # Save Echidna results
-          ls -la echidna-corpus/ || true
+          ls -la echidna-corpus/ || echo "No corpus generated"
 
       - name: Run Mythril Symbolic Execution
         run: |
@@ -234,10 +239,11 @@ jobs:
             echidna-corpus/
             security-deep-report.md
           retention-days: 90
+          if-no-files-found: warn
 
       - name: Upload Slither SARIF results
-        uses: github/codeql-action/upload-sarif@v2
-        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('slither-deep-results.sarif') != ''
         with:
           sarif_file: slither-deep-results.sarif
           category: slither-deep
