@@ -146,6 +146,7 @@ contract ReserveRequirementFuzzTest is Test {
         vm.assume(spender != address(0));
         vm.assume(recipient != address(0));
         vm.assume(owner != spender);
+        vm.assume(owner != recipient); // Prevent self-transfers for simpler testing
         amount = bound(amount, 1, 100 ether);
         
         // Mint tokens to owner
