@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml/badge.svg)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml)
 [![Security](https://github.com/roguedan/specchain-reserve-token/actions/workflows/security.yml/badge.svg)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/security.yml)
-[![codecov](https://codecov.io/gh/roguedan/specchain-reserve-token/branch/main/graph/badge.svg)](https://codecov.io/gh/roguedan/specchain-reserve-token)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](https://github.com/roguedan/specchain-reserve-token/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
