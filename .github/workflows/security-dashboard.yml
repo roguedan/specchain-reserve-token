@@ -44,7 +44,7 @@ jobs:
           # Initialize variables
           FAST_STATUS="Unknown"
           DEEP_STATUS="Unknown"
-          TOTAL_TESTS="18"
+          TOTAL_TESTS="69"
           SLITHER_ISSUES="0"
           ECHIDNA_PROPERTIES="15+"
           MYTHRIL_FINDINGS="0"
