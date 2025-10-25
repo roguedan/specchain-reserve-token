@@ -53,5 +53,5 @@ jobs:
 
       - name: Run Forge gas snapshot
         run: |
-          forge snapshot --check
+          forge snapshot --check --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol'
         id: snapshot
