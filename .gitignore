@@ -8,8 +8,7 @@ out/
 /broadcast/**/dry-run/
 *ChatGPT_instructions.md
 
-# Docs
-docs/
+# Docs (removed docs/ to allow GitHub Pages access)
 
 # Environment files with secrets
 .env
