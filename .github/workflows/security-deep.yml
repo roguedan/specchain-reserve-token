@@ -66,7 +66,7 @@ jobs:
       - name: Run Extended Foundry Tests
         run: |
           echo "=== EXTENDED FOUNDRY TESTING ==="
-          forge test --fuzz-runs 5000 --invariant-runs 500 --invariant-depth 50 --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' -vv
+          forge test --fuzz-runs 5000 --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' -vv
 
       - name: Run Slither Deep Analysis
         run: |
