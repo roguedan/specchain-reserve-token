@@ -41,7 +41,25 @@ jobs:
       - name: Run Forge coverage
         run: |
           forge coverage --report lcov --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol'
+          forge coverage --report summary --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' > coverage-summary.txt
         id: coverage
+
+      - name: Generate test report
+        run: |
+          echo "# Test Results Summary" > test-report.md
+          echo "" >> test-report.md
+          echo "**Date**: $(date)" >> test-report.md
+          echo "**Commit**: $GITHUB_SHA" >> test-report.md
+          echo "" >> test-report.md
+          echo "## Test Execution" >> test-report.md
+          echo "\`\`\`" >> test-report.md
+          forge test --match-path '*' --no-match-path 'tests/ReserveRequirement.invariant.t.sol' >> test-report.md 2>&1 || true
+          echo "\`\`\`" >> test-report.md
+          echo "" >> test-report.md
+          echo "## Coverage Summary" >> test-report.md
+          echo "\`\`\`" >> test-report.md
+          cat coverage-summary.txt >> test-report.md 2>/dev/null || echo "Coverage data not available" >> test-report.md
+          echo "\`\`\`" >> test-report.md
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
@@ -50,6 +68,16 @@ jobs:
           flags: foundry
           name: foundry-coverage
           fail_ci_if_error: false
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            test-report.md
+            coverage-summary.txt
+            .gas-snapshot
+        if: always()
 
       - name: Run Forge gas snapshot
         run: |
