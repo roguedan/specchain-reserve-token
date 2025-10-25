@@ -1,0 +1,163 @@
+No files changed, compilation skipped
+Warning: Replayed invariant failure from "/Users/danwilliams/Documents/web3/specchain-reserve-token/claude/skills/cache/invariant/failures/ReserveRequirementInvariantTest/invariant_BalancesEqualSupply" file. Run `forge clean` or remove file to ignore failure and to continue invariant test campaign.
+Warning: Replayed invariant failure from "/Users/danwilliams/Documents/web3/specchain-reserve-token/claude/skills/cache/invariant/failures/ReserveRequirementInvariantTest/invariant_ReserveAlwaysCoversSupply" file. Run `forge clean` or remove file to ignore failure and to continue invariant test campaign.
+
+Ran 10 tests for tests/ReserveRequirement.security.t.sol:ReserveRequirementSecurityTest
+[PASS] testCannotMintToZeroAddress() (gas: 78412)
+[PASS] testFrontRunningMint() (gas: 90467)
+[PASS] testGasConsumption() (gas: 74771)
+[PASS] testMintOverflow() (gas: 40365)
+[PASS] testNoReentrancyInTransfer() (gas: 479163)
+[PASS] testOnlyIssuerCanMint() (gas: 36303)
+[PASS] testReserveBalanceManipulation() (gas: 69301)
+[PASS] testTransferToSelf() (gas: 56730)
+[PASS] testTransferUnderflow() (gas: 48845)
+[PASS] testZeroTransfer() (gas: 63604)
+Suite result: ok. 10 passed; 0 failed; 0 skipped; finished in 40.77ms (877.29µs CPU time)
+
+Ran 5 tests for tests/ReserveRequirement.fuzz.t.sol:ReserveRequirementFuzzTest
+[PASS] testFuzz_MintAmount(uint256) (runs: 256, μ: 111769, ~: 116210)
+[PASS] testFuzz_MultipleOperations(uint256[5],address[5],uint256) (runs: 256, μ: 460083, ~: 461169)
+[PASS] testFuzz_ReserveManipulation(uint256) (runs: 256, μ: 209247, ~: 210932)
+[PASS] testFuzz_Transfer(address,address,uint256,uint256) (runs: 256, μ: 152936, ~: 137145)
+[PASS] testFuzz_TransferFrom(address,address,address,uint256,uint256) (runs: 256, μ: 218883, ~: 235055)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 54.18ms (154.26ms CPU time)
+
+Ran 3 tests for tests/ReserveRequirement.t.sol:ReserveRequirementTest
+[PASS] testMintGatedByCoverage() (gas: 156964)
+[PASS] testTransferRevertsWhenReserveBelowSupply() (gas: 84149)
+[PASS] testTransferSucceedsWhenReserveCoversSupply() (gas: 75019)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 10.88s (742.63µs CPU time)
+
+Ran 4 tests for tests/ReserveRequirement.invariant.t.sol:ReserveRequirementInvariantTest
+[FAIL: invariant_BalancesEqualSupply replay failure]
+	[Sequence] (original: 3, shrunk: 3)
+		sender=0x0000000000000000000000000000000000000FA3 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[0]
+		sender=0x0000000000000000000000000000000000000ced addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[15171850637548384740628245023326683171293323 [1.517e43]]
+		sender=0x000000000000000000000000000000000000103c addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[0]
+ invariant_BalancesEqualSupply() (runs: 1, calls: 1, reverts: 1)
+[PASS] invariant_NoBalanceExceedsSupply() (runs: 256, calls: 128000, reverts: 0)
+
+╭----------+--------------+-------+---------+----------╮
+| Contract | Selector     | Calls | Reverts | Discards |
++======================================================+
+| Handler  | drainReserve | 31841 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | fillReserve  | 32111 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | mint         | 31921 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | transfer     | 32127 | 0       | 0        |
+╰----------+--------------+-------+---------+----------╯
+
+[FAIL: invariant_ReserveAlwaysCoversSupply replay failure]
+	[Sequence] (original: 2, shrunk: 2)
+		sender=0x00000000000000000000000000000000000018e3 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[473603937419247161770532811127776077 [4.736e35]]
+		sender=0x0000000000000000000000000000000000000864 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=drainReserve(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77]]
+ invariant_ReserveAlwaysCoversSupply() (runs: 1, calls: 1, reverts: 1)
+[PASS] invariant_callSummary() (runs: 256, calls: 128000, reverts: 0)
+
+╭----------+--------------+-------+---------+----------╮
+| Contract | Selector     | Calls | Reverts | Discards |
++======================================================+
+| Handler  | drainReserve | 32167 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | fillReserve  | 31931 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | mint         | 31925 | 0       | 0        |
+|----------+--------------+-------+---------+----------|
+| Handler  | transfer     | 31977 | 0       | 0        |
+╰----------+--------------+-------+---------+----------╯
+
+Suite result: FAILED. 2 passed; 2 failed; 0 skipped; finished in 16.97s (27.84s CPU time)
+
+╭------------------------------------------+-----------------+-------+--------+-------+---------╮
+| contracts/RwaToken.sol:RwaToken Contract |                 |       |        |       |         |
++===============================================================================================+
+| Deployment Cost                          | Deployment Size |       |        |       |         |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| 1023889                                  | 4711            |       |        |       |         |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+|                                          |                 |       |        |       |         |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| Function Name                            | Min             | Avg   | Median | Max   | # Calls |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| allowance                                | 3170            | 3170  | 3170   | 3170  | 168     |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| approve                                  | 26717           | 46433 | 46677  | 47001 | 256     |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| balanceOf                                | 824             | 2823  | 2824   | 2824  | 64599   |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| mint                                     | 24482           | 47440 | 44121  | 78405 | 66450   |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| totalSupply                              | 2448            | 2448  | 2448   | 2448  | 2724    |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| transfer                                 | 31642           | 37394 | 33795  | 61675 | 58487   |
+|------------------------------------------+-----------------+-------+--------+-------+---------|
+| transferFrom                             | 34271           | 53209 | 62655  | 63171 | 256     |
+╰------------------------------------------+-----------------+-------+--------+-------+---------╯
+
+╭-----------------------------------------------------------+-----------------+-------+--------+--------+---------╮
+| tests/ReserveRequirement.invariant.t.sol:Handler Contract |                 |       |        |        |         |
++=================================================================================================================+
+| Deployment Cost                                           | Deployment Size |       |        |        |         |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| 2516678                                                   | 11624           |       |        |        |         |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+|                                                           |                 |       |        |        |         |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| Function Name                                             | Min             | Avg   | Median | Max    | # Calls |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| drainReserve                                              | 5321            | 24113 | 23647  | 50118  | 64232   |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| failedMintCount                                           | 2469            | 2469  | 2469   | 2469   | 1       |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| failedTransferCount                                       | 2471            | 2471  | 2471   | 2471   | 1       |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| fillReserve                                               | 12472           | 13145 | 12472  | 13943  | 64284   |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| getSumOfBalances                                          | 24026           | 24026 | 24026  | 24026  | 1       |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| getUsers                                                  | 50555           | 50555 | 50555  | 50555  | 1       |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| mint                                                      | 67662           | 78275 | 69356  | 184427 | 64126   |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| mintCount                                                 | 2492            | 2492  | 2492   | 2492   | 1       |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| transfer                                                  | 2895            | 66209 | 67196  | 114356 | 64363   |
+|-----------------------------------------------------------+-----------------+-------+--------+--------+---------|
+| transferCount                                             | 2513            | 2513  | 2513   | 2513   | 1       |
+╰-----------------------------------------------------------+-----------------+-------+--------+--------+---------╯
+
+╭---------------------------------------------------------------------+-----------------+-------+--------+-------+---------╮
+| tests/ReserveRequirement.security.t.sol:ReentrancyAttacker Contract |                 |       |        |       |         |
++==========================================================================================================================+
+| Deployment Cost                                                     | Deployment Size |       |        |       |         |
+|---------------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| 296370                                                              | 1317            |       |        |       |         |
+|---------------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+|                                                                     |                 |       |        |       |         |
+|---------------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| Function Name                                                       | Min             | Avg   | Median | Max   | # Calls |
+|---------------------------------------------------------------------+-----------------+-------+--------+-------+---------|
+| attack                                                              | 70577           | 70577 | 70577  | 70577 | 1       |
+╰---------------------------------------------------------------------+-----------------+-------+--------+-------+---------╯
+
+
+Ran 4 test suites in 17.48s (27.94s CPU time): 20 tests passed, 2 failed, 0 skipped (22 total tests)
+
+Failing tests:
+Encountered 2 failing tests in tests/ReserveRequirement.invariant.t.sol:ReserveRequirementInvariantTest
+[FAIL: invariant_BalancesEqualSupply replay failure]
+	[Sequence] (original: 3, shrunk: 3)
+		sender=0x0000000000000000000000000000000000000FA3 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[0]
+		sender=0x0000000000000000000000000000000000000ced addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[15171850637548384740628245023326683171293323 [1.517e43]]
+		sender=0x000000000000000000000000000000000000103c addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[0]
+ invariant_BalancesEqualSupply() (runs: 1, calls: 1, reverts: 1)
+[FAIL: invariant_ReserveAlwaysCoversSupply replay failure]
+	[Sequence] (original: 2, shrunk: 2)
+		sender=0x00000000000000000000000000000000000018e3 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=mint(uint256) args=[473603937419247161770532811127776077 [4.736e35]]
+		sender=0x0000000000000000000000000000000000000864 addr=[tests/ReserveRequirement.invariant.t.sol:Handler]0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f calldata=drainReserve(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77]]
+ invariant_ReserveAlwaysCoversSupply() (runs: 1, calls: 1, reverts: 1)
+
+Encountered a total of 2 failing tests, 20 tests succeeded

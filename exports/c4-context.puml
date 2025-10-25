@@ -1,0 +1,31 @@
+@startuml SpecChain-Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title System Context - SpecChain Reserve Token
+
+Person(tokenHolders, "Token Holders", "Transfer tokens, check balances, redeem tokens")
+Person(tradfiIssuer, "TradFi Issuer", "Mint new tokens, manage supply, ensure compliance")  
+Person(auditor, "Regulatory Auditor", "Monitor compliance, verify reserves, generate reports")
+Person(custodian, "Reserve Custodian", "Hold backing assets, manage custody, provide attestations")
+
+System(reserveToken, "SpecChain Reserve Token System", "Solidity Smart Contract", "Enforce 100% reserve backing with continuous solvency checks and transparent compliance")
+
+System_Ext(ethereum, "Ethereum Blockchain", "Immutable ledger, transaction settlement, event logging")
+System_Ext(explorer, "Block Explorer", "Etherscan", "Transaction visibility, contract verification, public audit trail")
+System_Ext(defi, "DeFi Protocols", "Uniswap, Aave, etc.", "Token liquidity, yield generation, composability")
+
+Rel(tokenHolders, reserveToken, "Transfer tokens", "JSON-RPC")
+Rel(tradfiIssuer, reserveToken, "Mint tokens", "JSON-RPC")
+Rel(auditor, reserveToken, "Monitor compliance", "Event logs")
+
+Rel(reserveToken, ethereum, "Settle transactions", "EVM opcodes")
+Rel_Back(reserveToken, custodian, "Verify reserves", "Balance query")
+
+Rel(tokenHolders, explorer, "View transactions", "HTTPS")
+Rel(auditor, explorer, "Audit trail", "HTTPS")
+
+Rel(tokenHolders, defi, "Trade/stake", "JSON-RPC")
+Rel(defi, reserveToken, "Integrate", "Smart contract calls")
+
+SHOW_LEGEND()
+@enduml

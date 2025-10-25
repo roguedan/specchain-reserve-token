@@ -1,0 +1,39 @@
+@startuml SpecChain-Component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram - RwaToken Smart Contract
+
+Person(users, "Users")
+Person(issuer, "Issuer")
+
+Container_Boundary(c1, "RwaToken Smart Contract") {
+    Component(erc20Interface, "ERC20 Interface", "Solidity Interface", "transfer(), transferFrom(), approve(), balanceOf(), totalSupply()")
+    Component(accessControl, "Access Control", "Solidity Modifiers", "onlyIssuer modifier, issuer address, permission validation")
+    Component(reserveValidator, "Reserve Validator", "Solidity Logic", "_checkReserveBacking(), ratio calculation, balance queries")
+    Component(tokenLogic, "Token Logic", "Solidity Functions", "mint() function, balance updates, supply management")
+    Component(eventEmitter, "Event Emitter", "Solidity Events", "Transfer events, Approval events, ReserveChecked events")
+    Component(stateManager, "State Manager", "Solidity Storage", "balanceOf mapping, allowance mapping, totalSupply variable")
+    Component(securityLayer, "Security Layer", "Solidity Patterns", "No external calls, Check-Effects-Interactions, input validation")
+}
+
+ContainerDb_Ext(reserveWallet, "Reserve Wallet", "Ethereum EOA", "ETH Balance")
+
+Rel(users, erc20Interface, "Call functions")
+Rel(issuer, erc20Interface, "Call mint")
+
+Rel(erc20Interface, accessControl, "Check permissions")
+Rel(erc20Interface, securityLayer, "Validate inputs")
+Rel(erc20Interface, tokenLogic, "Execute logic")
+
+Rel(tokenLogic, reserveValidator, "Validate reserves")
+Rel(tokenLogic, stateManager, "Update state")
+Rel(tokenLogic, eventEmitter, "Emit events")
+
+Rel(reserveValidator, reserveWallet, "Query balance")
+Rel(reserveValidator, eventEmitter, "Log checks")
+
+Rel(accessControl, tokenLogic, "Authorize operations")
+Rel(securityLayer, tokenLogic, "Secure execution")
+
+SHOW_LEGEND()
+@enduml

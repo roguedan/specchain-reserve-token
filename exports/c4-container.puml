@@ -1,0 +1,37 @@
+@startuml SpecChain-Container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container Diagram - SpecChain Reserve Token
+
+Person(users, "Users", "Web3 wallet users")
+Person(issuer, "Issuer", "Administrative EOA")
+Person(auditors, "Auditors", "Monitoring tools")
+
+System_Boundary(c1, "SpecChain Reserve Token System") {
+    Container(smartContract, "RwaToken Smart Contract", "Solidity 0.8.20, EVM", "ERC-20 implementation with reserve requirement validation, access control, and event emission")
+    Container(eventSystem, "Blockchain Event System", "Ethereum Events, JSON-RPC", "ReserveChecked events, Transfer events, Approval events, compliance logging")
+}
+
+Container_Ext(reserveWallet, "Reserve Wallet", "EOA/Multi-sig, Ethereum", "Holds backing ETH, balance queries, multi-sig control (future)")
+Container_Ext(ethNode, "Ethereum Node", "Geth/Nethermind, Mainnet/Sepolia", "Transaction processing, state management, event emission")
+Container_Ext(explorer, "Block Explorer", "React/Next.js, Etherscan", "Transaction history, contract verification, public audit interface")
+Container_Ext(monitoring, "Monitoring Service", "The Graph/Dune, GraphQL/SQL", "Reserve ratio tracking, alert systems, compliance dashboards")
+Container_Ext(testing, "Testing Infrastructure", "Foundry, Forge/Anvil", "Unit tests, fuzz testing, invariant testing, security validation")
+
+Rel(users, smartContract, "transfer() calls", "JSON-RPC")
+Rel(issuer, smartContract, "mint() calls", "JSON-RPC")
+
+Rel(smartContract, reserveWallet, "balance queries", "eth_getBalance")
+Rel(smartContract, eventSystem, "emit events", "LOG opcodes")
+Rel(smartContract, ethNode, "state changes", "SSTORE opcodes")
+
+Rel(eventSystem, monitoring, "event indexing", "WebSocket")
+Rel(eventSystem, explorer, "log queries", "eth_getLogs")
+
+Rel(auditors, explorer, "HTTPS requests", "REST API")
+Rel(auditors, monitoring, "GraphQL queries", "HTTPS")
+
+Rel(testing, smartContract, "deploy & test", "JSON-RPC")
+
+SHOW_LEGEND()
+@enduml
