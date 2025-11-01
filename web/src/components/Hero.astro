@@ -1,0 +1,50 @@
+---
+const stats = [
+  { label: 'Audited Protocols', value: '12+' },
+  { label: 'Bugs Prevented', value: '300+' },
+  { label: 'On-Chain Value Secured', value: '$1.5B' }
+];
+---
+<section class="section">
+  <div class="flex-1 space-y-8">
+    <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm uppercase tracking-widest text-primary-200">
+      Introducing Specchain Reserve Token
+    </span>
+    <h1 class="text-4xl font-black leading-tight text-white md:text-6xl">
+      Security-first infrastructure for dependable digital reserves.
+    </h1>
+    <p class="text-lg leading-relaxed text-slate-300 md:text-xl">
+      Specchain delivers audited, transparent treasury management for protocols that refuse to compromise on safety. Launch, monitor, and manage token reserves backed by verifiable cryptography and real-time reporting.
+    </p>
+    <div class="flex flex-wrap items-center gap-4">
+      <a href="#features" class="btn-primary">Explore the platform</a>
+      <a href="mailto:hello@specchain.xyz" class="text-sm font-semibold text-white/80 hover:text-white">Talk to our team →</a>
+    </div>
+    <dl class="grid grid-cols-1 gap-6 text-sm text-slate-300 sm:grid-cols-3">
+      {stats.map(({ label, value }) => (
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center" key={label}>
+          <dt class="text-xs uppercase tracking-widest text-slate-400">{label}</dt>
+          <dd class="mt-2 text-2xl font-semibold text-white">{value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+  <div class="flex-1">
+    <div class="relative mx-auto max-w-xl rounded-[3rem] border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 shadow-xl shadow-primary-900/30">
+      <div class="space-y-4 rounded-[2.5rem] bg-dark/80 p-8 backdrop-blur">
+        <h2 class="text-sm font-semibold uppercase tracking-[0.4em] text-primary-200">Reserve Dashboard</h2>
+        <p class="text-lg font-semibold text-white">Multi-chain coverage with deterministic treasury alerts.</p>
+        <ul class="space-y-3 text-sm text-slate-300">
+          <li>✔ Real-time collateralisation metrics</li>
+          <li>✔ Automated circuit breakers and pause controls</li>
+          <li>✔ Structured reporting for governance and regulators</li>
+        </ul>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Live Signal</p>
+          <p class="mt-2 text-3xl font-bold text-primary-200">99.982% uptime</p>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute -inset-1 rounded-[3.2rem] border border-primary-500/20"></div>
+    </div>
+  </div>
+</section>
