@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Specchain Reserve Token"
+  description="Open-source alpha demonstrating on-chain solvency checks for reserve-backed assets."
+>
+  <main>
+    <Hero />
+    <FeatureGrid />
+    <CTA />
+  </main>
+  <Footer />
+</BaseLayout>

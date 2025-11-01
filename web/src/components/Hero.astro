@@ -1,0 +1,55 @@
+---
+const stats = [
+  { label: 'Release Stage', value: 'Public Alpha' },
+  { label: 'License', value: 'MIT' },
+  { label: 'Test Suite', value: 'Foundry + Fuzzing' }
+];
+---
+<section class="section">
+  <div class="flex-1 space-y-8">
+    <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm uppercase tracking-widest text-primary-200">
+      Specchain Reserve Token · Open Alpha
+    </span>
+    <h1 class="text-4xl font-black leading-tight text-white md:text-6xl">
+      Open-source reserve token demo with continuous solvency checks.
+    </h1>
+    <p class="text-lg leading-relaxed text-slate-300 md:text-xl">
+      Specchain Reserve Token is a public alpha that demonstrates how a 1:1 reserve-backed asset can enforce solvency on-chain.
+      The contracts, specs, and tests in this repository are MIT-licensed so contributors can validate assumptions before any
+      production release.
+    </p>
+    <div class="flex flex-wrap items-center gap-4">
+      <a href="#features" class="btn-primary">See what ships today</a>
+      <a href="https://github.com/specchain/specchain-reserve-token" class="text-sm font-semibold text-white/80 hover:text-white">Browse the repo →</a>
+    </div>
+    <dl class="grid grid-cols-1 gap-6 text-sm text-slate-300 sm:grid-cols-3">
+      {stats.map(({ label, value }) => (
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center" key={label}>
+          <dt class="text-xs uppercase tracking-widest text-slate-400">{label}</dt>
+          <dd class="mt-2 text-2xl font-semibold text-white">{value}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="text-xs uppercase tracking-[0.35em] text-slate-400">
+      Alpha software · rapid iteration · verify in your own environment.
+    </p>
+  </div>
+  <div class="flex-1">
+    <div class="relative mx-auto max-w-xl rounded-[3rem] border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 shadow-xl shadow-primary-900/30">
+      <div class="space-y-4 rounded-[2.5rem] bg-dark/80 p-8 backdrop-blur">
+        <h2 class="text-sm font-semibold uppercase tracking-[0.4em] text-primary-200">What’s in the repo</h2>
+        <p class="text-lg font-semibold text-white">Minimal RWA reserve token with enforced coverage checks.</p>
+        <ul class="space-y-3 text-sm text-slate-300">
+          <li>✔ `RwaToken.sol` contract verifying reserves on every mint and transfer</li>
+          <li>✔ Foundry unit + fuzz tests documenting expected guardrails</li>
+          <li>✔ Docs outlining limitations, roadmap, and Sepolia deployment</li>
+        </ul>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Project Status</p>
+          <p class="mt-2 text-3xl font-bold text-primary-200">Open Alpha</p>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute -inset-1 rounded-[3.2rem] border border-primary-500/20"></div>
+    </div>
+  </div>
+</section>

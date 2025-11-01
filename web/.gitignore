@@ -1,0 +1,9 @@
+node_modules
+.dist
+.dist-ssr
+.vercel
+.netlify
+dist
+.cache
+.astro
+.DS_Store
