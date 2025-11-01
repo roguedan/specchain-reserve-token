@@ -1,0 +1,40 @@
+---
+const features = [
+  {
+    title: 'Deterministic Reserves',
+    description:
+      'Programmatic minting, redemption, and rebalancing with safeguards that prevent drift away from the target collateral ratio.',
+    icon: '🔐'
+  },
+  {
+    title: 'Formal Verification',
+    description:
+      'Core contracts are proven against critical invariants. Every release ships with differential testing and circuit breaker validation.',
+    icon: '🧪'
+  },
+  {
+    title: 'Continuous Monitoring',
+    description:
+      'We surface cross-chain risk signals, wallet movements, and oracle variance on one unified observability layer.',
+    icon: '📡'
+  }
+];
+---
+<section id="features" class="section flex-col gap-16">
+  <div class="mx-auto max-w-3xl text-center">
+    <p class="uppercase tracking-[0.4em] text-sm text-primary-200">Why Specchain</p>
+    <h2 class="mt-4 text-4xl font-bold text-white md:text-5xl">Designed for resilient token treasuries</h2>
+    <p class="mt-6 text-lg text-slate-300">
+      AstroWind-inspired design system, tailored for a single-page presentation. Each module is composable so you can grow the site without disrupting your existing smart contract workspace.
+    </p>
+  </div>
+  <div class="grid gap-8 md:grid-cols-3">
+    {features.map(({ title, description, icon }) => (
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8" key={title}>
+        <div class="mb-4 text-4xl" aria-hidden="true">{icon}</div>
+        <h3 class="text-xl font-semibold text-white">{title}</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-300">{description}</p>
+      </article>
+    ))}
+  </div>
+</section>
