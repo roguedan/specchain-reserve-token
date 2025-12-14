@@ -1,7 +1,7 @@
 # Latest Security Audit Report
 
-**Latest Report**: [Audit Report 2025-12-07](reports/audit-report-2025-12-07.md)
-**Generated**: Sun Dec  7 03:37:06 UTC 2025
+**Latest Report**: [Audit Report 2025-12-14](reports/audit-report-2025-12-14.md)
+**Generated**: Sun Dec 14 03:37:52 UTC 2025
 
 ## Report History
 - [Latest Report](reports/latest-audit-report.md)
