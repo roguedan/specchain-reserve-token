@@ -1,7 +1,7 @@
 # Latest Security Audit Report
 
-**Latest Report**: [Audit Report 2026-02-08](reports/audit-report-2026-02-08.md)
-**Generated**: Sun Feb  8 04:04:14 UTC 2026
+**Latest Report**: [Audit Report 2026-02-15](reports/audit-report-2026-02-15.md)
+**Generated**: Sun Feb 15 03:56:14 UTC 2026
 
 ## Report History
 - [Latest Report](reports/latest-audit-report.md)
